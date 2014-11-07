@@ -10,7 +10,7 @@ class AlbumController extends FotosController {
   public function getLista() {
     $albumes = Album::all();
     return View::make('album.lista')
-            ->with('albumes', $albumes);
+                    ->with('albumes', $albumes);
   }
 
   //función que guarda en la bd
@@ -23,7 +23,27 @@ class AlbumController extends FotosController {
     ];
 
     Album::create($album);
-    return Redirect::to("/album/lista");
+    return Redirect::to("album/lista");
+  }
+
+  public function getEliminar($id) {
+    $album = Album::find($id);
+    if ($album && $album->es_propiedad_de_usuario(Auth::user()->id)) {
+      Album::destroy($id);
+    }
+    return Redirect::to("album/lista");
+  }
+
+  public function getImagenes($id) {
+    $album = Album::find($id);
+    if($album && $album->es_propiedad_de_usuario(Auth::user()->id)){
+      
+      $imagenes = $album->get_imagenes();
+      return View::make('imagen.lista')
+              ->with('album', $album)
+              ->with('imagenes', $imagenes);
+    }
+    return Redirect::to("album/lista");
   }
 
 }
