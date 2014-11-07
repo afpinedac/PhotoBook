@@ -2,6 +2,6 @@
 
 class Imagen extends LaraFotosModel{
 	
-	protected $table = '';
+	protected $table = 'imagen';
 
 }

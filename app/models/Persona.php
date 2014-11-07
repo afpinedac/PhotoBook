@@ -2,6 +2,6 @@
 
 class Persona extends LaraFotosModel{
 	
-	protected $table = '';
+	protected $table = 'persona';
 
 }

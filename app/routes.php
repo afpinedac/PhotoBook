@@ -10,8 +10,16 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/t', function(){
+  echo Hash::make('a');
 });
+
+
+Route::get('/', array('uses' => 'UsuarioController@getLogin'));
+Route::post('/login', array('uses' => 'UsuarioController@postLogin'));
+Route::get('/logout', array('uses' => 'UsuarioController@getLogout'));
+
+
+Route::controller('album','albumController');
+Route::controller('imagen','imagenController');
+Route::controller('comentario','comentarioController');

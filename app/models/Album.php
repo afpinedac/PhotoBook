@@ -2,6 +2,6 @@
 
 class Album extends LaraFotosModel{
 	
-	protected $table = '';
+	protected $table = 'album';
 
 }
