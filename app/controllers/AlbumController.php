@@ -9,8 +9,10 @@ class AlbumController extends FotosController {
   //función que muestra la lista
   public function getLista() {
     $albumes = Album::all();
+    $otrosalbumes = Album::get_otros_albumes();
     return View::make('album.lista')
-                    ->with('albumes', $albumes);
+                    ->with('albumes', $albumes)
+                    ->with('otrosalbumes', $otrosalbumes);
   }
 
   //función que guarda en la bd
@@ -37,7 +39,6 @@ class AlbumController extends FotosController {
   public function getImagenes($id) {
     $album = Album::find($id);
     if ($album && $album->es_propiedad_de_usuario(Auth::user()->id)) {
-
       $imagenes = $album->get_imagenes();
       return View::make('imagen.lista')
                       ->with('album', $album)
@@ -48,8 +49,10 @@ class AlbumController extends FotosController {
 
   public function getImagen($id) {
     $imagen = Imagen::find($id);
+    $comentarios = Imagen::get_comentarios($id);
     return View::make('imagen.ver')
-                    ->with('imagen', $imagen);
+                    ->with('imagen', $imagen)
+                    ->with('comentarios', $comentarios);
   }
 
 }

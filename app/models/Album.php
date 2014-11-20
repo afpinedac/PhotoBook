@@ -3,6 +3,12 @@
 class Album extends LaraFotosModel {
 
   protected $table = 'album';
+  
+  public static function all($colums =[]){
+    return DB::table('album')
+            ->where('usuario', Auth::user()->id)
+            ->get();
+  }
 
   public function es_propiedad_de_usuario($user) {
     return DB::table('album')
@@ -11,9 +17,9 @@ class Album extends LaraFotosModel {
                     ->count() == 1;
   }
 
-  public function get_numero_de_imagenes() {
+  public static function get_numero_de_imagenes($album) {
     return DB::table('imagen')
-                    ->where('album', $this->id)
+                    ->where('album', $album)
                     ->count();
   }
 
@@ -21,6 +27,15 @@ class Album extends LaraFotosModel {
     return DB::table('imagen')
                     ->where('album', $this->id)
                     ->get();
+  }
+  
+  
+  public static function get_otros_albumes(){
+    return DB::table('album')
+            ->join('persona','album.usuario','=','persona.id')
+            ->where('usuario','<>',Auth::user()->id)
+            ->select(['persona.nombre as persona', 'album.id','album.nombre as album','album.descripcion'])
+            ->get();
   }
 
 }

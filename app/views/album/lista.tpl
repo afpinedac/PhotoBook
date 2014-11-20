@@ -30,9 +30,8 @@
 
 
 {capture assign="right"}
-
+<h2>Mi Lista de álbumes</h2>
   {if count($albumes)>0}
-    <h2>Lista de Albumes</h2>
 
     <hr>
     <table border='1' class='table-responsive table-condensed table-bordered' width='100%'>
@@ -51,7 +50,7 @@
             <td>{$album->descripcion}</td>
 
 
-            <td><a href="{url('/album/imagenes/')}/{$album->id}">ver imagenes</a> ({$album->get_numero_de_imagenes()})</td>
+            <td><a href="{url('/album/imagenes/')}/{$album->id}">ver imagenes</a> ({Album::get_numero_de_imagenes($album->id)})</td>
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -80,6 +79,50 @@
       <center>No tiene albumes creados</center>
     </div>
   {/if}
+  
+  
+  
+  
+  <!----lista de otros usuarios--------->
+  <hr>
+  <h2>Álbumes de otros usuarios</h2>
+  
+  {if count($otrosalbumes)>0}
+    
+
+    <hr>
+    <table border='1' class='table-responsive table-condensed table-bordered' width='100%'>
+      <thead>
+        <tr>
+          <td>Nombre</td>
+          <td>Propietario</td>
+          <td>Descripción</td>
+          <td>Ver imágenes</td>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $otrosalbumes as $album}
+          <tr>
+            <td>{$album->album}</td>
+            <td>{$album->persona}</td>
+            <td>{$album->descripcion}</td>
+            <td><a href="{url('/album/imagenes/')}/{$album->id}">ver imagenes</a> ({Album::get_numero_de_imagenes($album->id)})</td>
+          </tr>
+        {/foreach}
+      </tbody>
+    </table>
+
+  {else}
+    <br>
+    <div class="alert alert-danger fade in">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <center>No existen otros álbumes</center>
+    </div>
+  {/if}
+  
+  
+  
+  
 {/capture}
 
 

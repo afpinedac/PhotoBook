@@ -2,6 +2,7 @@
 
    <head>
       <link rel="stylesheet" type="text/css" media="screen" href="{url('/')}/assets/libs/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="{url('/')}/assets/css/photos.css">
    </head> 
    
   <body>

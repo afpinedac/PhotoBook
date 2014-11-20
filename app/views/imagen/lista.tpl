@@ -3,23 +3,23 @@
   <h2>Agregar Foto </h2>
   <br>
 
-  {Form::open(['url' => '/imagen/guardar','class'=> 'form-horizontal'])}
+  {Form::open(['url' => '/imagen/guardar','class'=> 'form-horizontal','files'=>true])}
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
     <div class="col-sm-10">
-      <input type="textt" name="titulo" class="form-control" id="inputEmail3" placeholder="Nombre">
+      <input type="textt" required name="titulo" class="form-control" id="inputEmail3" placeholder="Nombre">
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Descripción</label>
     <div class="col-sm-10">
-      <textarea type="text" rows="4" name='descripcion' class="form-control" id="inputPassword3" placeholder="Descripción"></textarea>
+      <textarea type="text" required rows="4" name='descripcion' class="form-control" id="inputPassword3" placeholder="Descripción"></textarea>
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Archivo</label>
     <div class="col-sm-10">
-      <input type="file" rows="4" name='foto' class="form-control" id="inputPassword3" placeholder="Descripción"/>
+      <input type="file" rows="4" name='foto' class="form-control" id="inputPassword3" required placeholder="Descripción"/>
     </div>
   </div>
   <input type="hidden" name="album" value="{$album->id}">
@@ -51,6 +51,7 @@
         <tr>
           <td>Titulo</td>
           <td>Descripción</td>
+          <td style='width: 1px;'>Comentarios</td>
           
           <td width="2%">Opciones</td>
         </tr>
@@ -61,6 +62,7 @@
           <tr>
             <td><a href='{url('album/imagen/')}/{$imagen->id}'>{$imagen->titulo}</a></td>
             <td>{$imagen->descripcion}</td>
+            <td><center>{Imagen::get_numero_comentarios($imagen->id)}</center></td>
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -81,7 +83,7 @@
   {else}
     <div class="alert alert-danger fade in">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <center>No tiene albumes creados</center>
+      <center>No tiene fotos en este álbum</center>
     </div>
   {/if}
 

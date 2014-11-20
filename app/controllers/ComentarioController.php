@@ -11,7 +11,7 @@ class ComentarioController extends FotosController {
     $imagen = Input::get('imagen');
     
     $comentario = [
-        'texto'=> Input::get('comentario'),
+        'texto'=> Input::get('texto'),
         'imagen'=> $imagen,
         
     ];
@@ -21,4 +21,6 @@ class ComentarioController extends FotosController {
     
   }
 
+  
+  
 }
