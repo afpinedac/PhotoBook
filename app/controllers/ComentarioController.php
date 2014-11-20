@@ -13,7 +13,7 @@ class ComentarioController extends FotosController {
     $comentario = [
         'texto'=> Input::get('texto'),
         'imagen'=> $imagen,
-        
+        'usuario'=> Auth::user()->id,
     ];
     
     Comentario::create($comentario);

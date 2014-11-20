@@ -43,6 +43,14 @@ class AlbumController extends FotosController {
       return View::make('imagen.lista')
                       ->with('album', $album)
                       ->with('imagenes', $imagenes);
+    }else{ // no es el dueño 
+       $otrosalbumes = Album::get_otros_albumes();
+      $imagenes = $album->get_imagenes();
+       return View::make('imagen.lista_otros')
+               ->with('otrosalbumes',$otrosalbumes)
+               ->with('album',$album)
+                ->with('imagenes', $imagenes);
+               
     }
     return Redirect::to("album/lista");
   }

@@ -1,50 +1,25 @@
 {capture assign="left"}
-
-  <h2>Agregar Foto </h2>
-  <br>
-
-  {Form::open(['url' => '/imagen/guardar','class'=> 'form-horizontal','files'=>true])}
-  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
-    <div class="col-sm-10">
-      <input type="textt" required name="titulo" class="form-control" id="inputEmail3" placeholder="Nombre">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Descripción</label>
-    <div class="col-sm-10">
-      <textarea type="text" required rows="4" name='descripcion' class="form-control" id="inputPassword3" placeholder="Descripción"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">Archivo</label>
-    <div class="col-sm-10">
-      <input type="file" rows="4" name='foto' class="form-control" id="inputPassword3" required placeholder="Descripción"/>
-    </div>
-  </div>
-  <input type="hidden" name="album" value="{$album->id}">
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-8">
-      <button type="submit" class="btn btn-success">Crear</button>
-    </div>
-  </div>
-  {Form::close()}
-
-
-
-
-
-
-{/capture}
-{capture assign="right"}
-
-  <h1 class="pull-right">Album: <span class="badge">{$album->nombre|capitalize}</span></h1>
-  <br>
+ 
+  <h3 class='pull-right'>Lista de Álbumes</h3>
   <br>
   <hr>
- <h2>Lista de Fotos</h2>
-  {if count($imagenes)>0}
+  
    
+    <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+      {foreach $otrosalbumes as $otroalbum}
+        <li role="presentation" {if $otroalbum->id==$album->id}class="active"{/if}><a href="{url('/')}/album/imagenes/{$otroalbum->id}">{$otroalbum->album|capitalize}</a></li>
+    {/foreach}
+    </ul>
+{/capture}
+{capture assign="right"}
+ <span class='pull-right'><a href='{url('/album')}'>[Volver]</a></span>
+  <h1 class="">Album: <span class="badge">{$album->nombre|capitalize}</span></h1>
+  
+  
+  <hr>
+
+  {if count($imagenes)>0}
+    <h2>Lista de Fotos</h2>
 
     <table border='1' class='table-responsive table-condensed table-bordered' width='100%'>
       <thead>
@@ -86,8 +61,7 @@
       <center>No tiene fotos en este álbum</center>
     </div>
   {/if}
-
-
+  
 {/capture}
 
 {include file='templates/template.tpl' layout='two' title=''}

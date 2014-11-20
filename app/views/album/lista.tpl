@@ -30,7 +30,7 @@
 
 
 {capture assign="right"}
-<h2>Mi Lista de álbumes</h2>
+<h2>Mi Lista de álbumes ({Usuario::get_numero_albumes()})</h2>
   {if count($albumes)>0}
 
     <hr>
@@ -80,16 +80,11 @@
     </div>
   {/if}
   
-  
-  
-  
   <!----lista de otros usuarios--------->
   <hr>
-  <h2>Álbumes de otros usuarios</h2>
+  <h2>Álbumes de otros usuarios ({Usuario::get_numero_otros_albumes()})</h2>
   
   {if count($otrosalbumes)>0}
-    
-
     <hr>
     <table border='1' class='table-responsive table-condensed table-bordered' width='100%'>
       <thead>

@@ -31,6 +31,8 @@
 
   <h1 class='badge'>{$imagen->titulo}</h1>
   
+  <span class='pull-right'><a href='{url('album/imagenes/')}/{$imagen->album}'>[Volver]</a></span>
+  
   <center><img  class='ph-imagen img-responsive img-thumbnail' src='{url('/')}/assets/img/{$imagen->foto}'></center>
   
   
