@@ -1,55 +1,99 @@
-{capture assign="content"}
+{capture assign="left"}
 
- 
-  Crear Album
+
+  <h2>Crear Album</h2>
   <br>
-  
-  {Form::open(['url' => '/album/guardar'])}
-  Nombre:  <input name='nombre' type='text' required><br>
-  Descripción: <textarea name='descripcion' required></textarea>
-  <input type='submit'>
-  
-  {Form::close()}
 
-  
-  
-  
-  <hr>
-  <h3>Lista</h3>
-  
-  
-    <table border='1'>
+  {Form::open(['url' => '/album/guardar','class'=> 'form-horizontal'])}
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
+    <div class="col-sm-10">
+      <input type="textt" name="nombre" class="form-control" id="inputEmail3" placeholder="Nombre">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Descripción</label>
+    <div class="col-sm-10">
+      <textarea type="password" rows="4" name='descripcion' class="form-control" id="inputPassword3" placeholder="Descripción"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button type="submit" class="btn btn-success">Crear</button>
+    </div>
+  </div>
+  {Form::close()}
+{/capture}
+
+
+
+
+{capture assign="right"}
+
+  {if count($albumes)>0}
+    <h2>Lista de Albumes</h2>
+
+    <hr>
+    <table border='1' class='table-responsive table-condensed table-bordered' width='100%'>
       <thead>
         <tr>
           <td>Nombre</td>
           <td>Descripción</td>
           <td>Ver imágenes</td>
-          <td>Opciones</td>
+          <td width="2%">Opciones</td>
         </tr>
       </thead>
       <tbody>
         {foreach $albumes as $album}
-        <tr>
-          <td>{$album->nombre}</td>
-          <td>{$album->descripcion}</td>
-          <td><a href="{url('/album/imagenes/')}/{$album->id}">ver imagenes</a> ({$album->get_numero_de_imagenes()})</td>
-          <td><a href='{url('/album/eliminar/')}/{$album->id}'>[Eliminar]</a> - <a href='{url('/album/editar/')}/{$album->id}'>[Editar]</a></td>
-          
-          
-        </tr>
+          <tr>
+            <td>{$album->nombre}</td>
+            <td>{$album->descripcion}</td>
+
+
+            <td><a href="{url('/album/imagenes/')}/{$album->id}">ver imagenes</a> ({$album->get_numero_de_imagenes()})</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  Opciones <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                  <li><a href='{url('/album/editar/')}/{$album->id}'>Editar</a></li>
+                  <li><a href='{url('/album/eliminar/')}/{$album->id}'>Eliminar</a></li>
+                </ul>
+              </div>
+
+              {*  <a href='{url('/album/eliminar/')}/{$album->id}'>[Eliminar]</a> - <a href='{url('/album/editar/')}/{$album->id}'>[Editar]</a>*}
+
+
+            </td>
+
+
+          </tr>
         {/foreach}
       </tbody>
     </table>
-  
 
-  
-  
-  
-  
-  
-  
-  
-  
+  {else}
+    <div class="alert alert-danger fade in">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <center>No tiene albumes creados</center>
+    </div>
+  {/if}
 {/capture}
 
-{include file='templates/template.tpl' layout='main' title=''}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{include file='templates/template.tpl' layout='two' title=''}

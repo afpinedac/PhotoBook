@@ -36,14 +36,20 @@ class AlbumController extends FotosController {
 
   public function getImagenes($id) {
     $album = Album::find($id);
-    if($album && $album->es_propiedad_de_usuario(Auth::user()->id)){
-      
+    if ($album && $album->es_propiedad_de_usuario(Auth::user()->id)) {
+
       $imagenes = $album->get_imagenes();
       return View::make('imagen.lista')
-              ->with('album', $album)
-              ->with('imagenes', $imagenes);
+                      ->with('album', $album)
+                      ->with('imagenes', $imagenes);
     }
     return Redirect::to("album/lista");
+  }
+
+  public function getImagen($id) {
+    $imagen = Imagen::find($id);
+    return View::make('imagen.ver')
+                    ->with('imagen', $imagen);
   }
 
 }

@@ -15,4 +15,4 @@
   
 {/capture}
 
-{include file='templates/template.tpl' layout='main' title=''}
+{include file='templates/template.tpl' layout='default' title=''}

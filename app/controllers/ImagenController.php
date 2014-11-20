@@ -18,5 +18,15 @@ class ImagenController extends FotosController {
     Imagen::create($imagen);
     return Redirect::to("album/imagenes/{$album}");
   }
+  
+  
+  public function getEliminar($id){
+    $imagen = Imagen::find($id);
+    Imagen::destroy($id);
+    return Redirect::to("/album/imagenes/{$imagen->album}");
+  }
 
+  
+
+  
 }
